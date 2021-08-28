@@ -26,7 +26,7 @@ token = os.environ.get("TOKEN")
 database_url = os.environ.get("DATABASE_URL")
 first_semestr = "https://www.polessu.by/ruz/cab/"
 second_semestr = "https://www.polessu.by/ruz/cab/term2/"
-semestr = second_semestr
+semestr = first_semestr
 
 bot = telebot.TeleBot(token)
 keyboard = keyboard.Keyboard(bot)
@@ -366,12 +366,12 @@ def ringers():
 
 
 # scheduler of database updating at 14-01 UTC and ringer for subscribers from monday to saturday
-scheduler.add_job(update_base, trigger='cron', day_of_week='mon-sat', hour=14, minute=1)
-scheduler.add_job(ringers, trigger='cron', minute='*', max_instances=5)
+scheduler.add_job(update_base, trigger="cron", day_of_week="mon-sat", hour=14, minute=1)
+scheduler.add_job(ringers, trigger="cron", minute="*", max_instances=5)
 try:
     scheduler.start()
 except (KeyboardInterrupt, SystemExit):
     pass
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     bot.infinity_polling()
